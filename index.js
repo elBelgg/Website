@@ -6,10 +6,123 @@
 
 $(document).ready(() => {
 
+	let currentName = 0;
+
+	let names = ["Beltran elBelgg", "owl", "сова", "フクロウ"]
+
+	let pressedKeys = "";
+
+	function switchName() {
+		currentName++;
+
+		if (currentName >= names.length) {
+			currentName = 0;
+		}
+
+		$(".elBelgg").text(names[currentName]).removeClass("latin").removeClass("cyrillic").removeClass("cjk")
+		$(".header").removeClass("cjk");
+
+		switch(currentName) {
+			case 0:
+			case 1:
+				$(".elBelgg").addClass("latin");
+				break;
+			case 2:
+				$(".elBelgg").addClass("cyrillic");
+				break;
+			case 3:
+				$(".elBelgg").addClass("cjk");
+				$(".header").addClass("cjk");
+				break;
+		}
+	}
+
+	// Adapted from https://stackoverflow.com/questions/5573096/detecting-webp-support
+
+	function checkWebP(callback) {
+		var img = new Image();
+		img.onload = function() {
+			var result = (img.width > 0) && (img.height > 0);
+			callback(result);
+		};
+		img.onerror = function() {
+			callback(false);
+		};
+		img.src = "data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA";
+	}
+
+	checkWebP(result => {
+		if (result === false) {
+			console.log("No WebP");
+			$("html").addClass("nowebp")
+		} else {
+			console.log("Yes WebP");
+		}
+	});
+
+	function tabClick(num, dontPushState) {
+		$(".tab").removeClass("tabSelected");
+		$(".section").removeClass("sectionSelected");
+		$(".tab"+num).addClass("tabSelected");
+
+		$(".sectionList").attr("data-current-section",num);
+		$(".section"+num).addClass("sectionSelected");
+	}
+
+	$(".tab1").click((e) => {
+		history.pushState({}, "", "/");
+		onStateChange("/");
+		e.preventDefault();
+	})
+	$(".tab2").click((e) => {
+		history.pushState({}, "", "/projects");
+		onStateChange("/projects");
+		e.preventDefault();
+	})
+	$(".tab3").click((e) => {
+		history.pushState({}, "", "/mentions");
+		onStateChange("/mentions");
+		e.preventDefault();
+	})
+	$(".tab4").click((e) => {
+		history.pushState({}, "", "/sitemap");
+		onStateChange("/sitemap");
+		e.preventDefault();
+	})
+
+	$(".elBelgg").click(() => {
+		switchName();
+	})
+
+	if (location._orig_href) {
+		$("#archiveEasterEgg").removeClass("hidden")
+	}
+
 	function onStateChange(url) {
 		url = url.replace(/\?.+/g, "").replace(/\/new/,"");
 
 		console.debug("onStateChange", url);
+
+		if (url === "/projects" || url === "/projects/") {
+			if (url === "/projects/") {
+				history.replaceState({}, "", "/projects" + window.location.search)
+			}
+			tabClick(2)
+		}
+
+		if (url === "/mentions" || url === "/mentions/") {
+			if (url === "/mentions/") {
+				history.replaceState({}, "", "/mentions" + window.location.search)
+			}
+			tabClick(3)
+		}
+
+		if (url === "/sitemap" || url === "/sitemap/") {
+			if (url === "/sitemap/") {
+				history.replaceState({}, "", "/sitemap" + window.location.search)
+			}
+			tabClick(4)
+		}
 
 		if (url === "/") {
 			tabClick(1)
