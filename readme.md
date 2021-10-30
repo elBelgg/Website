@@ -1,1 +1,1 @@
-Web para tener mis redes sociales y demás
+Web para tener mis redes sociales y demás (OFFLINE)
