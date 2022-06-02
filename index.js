@@ -8,7 +8,7 @@ $(document).ready(() => {
 
 	let currentName = 0;
 
-	let names = ["Beltran elBelgg", "owl", "сова", "フクロウ"]
+	let names = ["Beltrán elBelgg", "illustrious raven", "erhabener Rabe", "estrålende ravn"]
 
 	let pressedKeys = "";
 
@@ -19,20 +19,23 @@ $(document).ready(() => {
 			currentName = 0;
 		}
 
-		$(".elBelgg").text(names[currentName]).removeClass("latin").removeClass("cyrillic").removeClass("cjk")
+		$(".elBelgg").text(names[currentName]).removeClass("1").removeClass("2").removeClass("3").removeClass("4")
 		$(".header").removeClass("cjk");
 
 		switch(currentName) {
 			case 0:
 			case 1:
-				$(".elBelgg").addClass("latin");
+				$(".elBelgg").addClass("1");
 				break;
 			case 2:
-				$(".elBelgg").addClass("cyrillic");
+				$(".elBelgg").addClass("2");
 				break;
 			case 3:
-				$(".elBelgg").addClass("cjk");
-				$(".header").addClass("cjk");
+				$(".elBelgg").addClass("3");
+				break;
+			case 4:
+				$(".elBelgg").addClass("4");
+				$(".header").addClass("4");
 				break;
 		}
 	}
@@ -68,27 +71,6 @@ $(document).ready(() => {
 		$(".sectionList").attr("data-current-section",num);
 		$(".section"+num).addClass("sectionSelected");
 	}
-
-	$(".tab1").click((e) => {
-		history.pushState({}, "", "/");
-		onStateChange("/");
-		e.preventDefault();
-	})
-	$(".tab2").click((e) => {
-		history.pushState({}, "", "/projects");
-		onStateChange("/projects");
-		e.preventDefault();
-	})
-	$(".tab3").click((e) => {
-		history.pushState({}, "", "/mentions");
-		onStateChange("/mentions");
-		e.preventDefault();
-	})
-	$(".tab4").click((e) => {
-		history.pushState({}, "", "/sitemap");
-		onStateChange("/sitemap");
-		e.preventDefault();
-	})
 
 	$(".elBelgg").click(() => {
 		switchName();
