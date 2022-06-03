@@ -8,7 +8,7 @@ $(document).ready(() => {
 
 	let currentName = 0;
 
-	let names = ["Beltrán elBelgg", "illustrious raven", "erhabener Rabe", "estrålende ravn"]
+	let names = ["Beltrán elBelgg", "illustrious raven", "erhabener rabe", "strålende ravn"]
 
 	let pressedKeys = "";
 
