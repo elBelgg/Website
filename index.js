@@ -80,36 +80,7 @@ $(document).ready(() => {
 		$("#archiveEasterEgg").removeClass("hidden")
 	}
 
-	function onStateChange(url) {
-		url = url.replace(/\?.+/g, "").replace(/\/new/,"");
 
-		console.debug("onStateChange", url);
-
-		if (url === "/projects" || url === "/projects/") {
-			if (url === "/projects/") {
-				history.replaceState({}, "", "/projects" + window.location.search)
-			}
-			tabClick(2)
-		}
-
-		if (url === "/mentions" || url === "/mentions/") {
-			if (url === "/mentions/") {
-				history.replaceState({}, "", "/mentions" + window.location.search)
-			}
-			tabClick(3)
-		}
-
-		if (url === "/sitemap" || url === "/sitemap/") {
-			if (url === "/sitemap/") {
-				history.replaceState({}, "", "/sitemap" + window.location.search)
-			}
-			tabClick(4)
-		}
-
-		if (url === "/") {
-			tabClick(1)
-		}
-	}
 	window.addEventListener("popstate", event => {
 		console.debug("popstate");
 		onStateChange(location.pathname);
@@ -117,19 +88,10 @@ $(document).ready(() => {
 
 	// Map old style URLs to new style
 
-	if (location.hash === "#links") {
+	if (location.hash === "#") {
 		history.pushState({}, "", "/");
 		onStateChange("/")
-	} else if (location.hash === "#projects") {
-		history.pushState({}, "", "/projects");
-		onStateChange("/projects")
-	} else if (location.hash === "#media") {
-		history.pushState({}, "", "/mentions");
-		onStateChange("/mentions")
-	} else if (location.hash === "#sitemap") {
-		history.pushState({}, "", "/sitemap");
-		onStateChange("/sitemap")
-	} else {
+	
 		// Else, use normal type
 		onStateChange(location.pathname)
 	}
@@ -147,35 +109,6 @@ $(document).ready(() => {
 		},1000)
 	});
 
-	$("#boopButton").click(() => {
-		let heart = $(document.createElement("div")).addClass("boopHeart").append(
-			$(document.createElement("span")).addClass("material-icons").html("favorite")
-		);
-		let rawHeart = heart[0];
-
-		let random = Math.random();
-
-		if (random < 0.33) {
-			heart.addClass("anim1");
-		} else if (random < 0.66) {
-			heart.addClass("anim2");
-		} else {
-			heart.addClass("anim3")
-		}
-
-		setTimeout(() => {
-			console.debug(heart);
-			heart[0].remove();
-		},3999)
-
-		
-
-		$(".boopContainer").append(
-			heart
-		)
-
-
-	});
 
 	$(document).on("keydown", e => {
 		pressedKeys += e.code;
