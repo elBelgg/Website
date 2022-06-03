@@ -107,6 +107,15 @@ $(document).ready(() => {
 		window.discordCopyTimeout = setTimeout(() => {
 			$("#discordCopy").removeClass("copied");
 		},1000)
+		
+		function isMobile() {
+			return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+			}
+			
+			if (!isMobile()) {
+			//place script you don't want to run on mobile here
+			
+			}
 	});
 
 
