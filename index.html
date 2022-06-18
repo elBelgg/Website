@@ -19,8 +19,19 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script async="" src="/cdn-cgi/challenge-platform/h/g/scripts/invisible.js"></script></head>
 
-	<body>
-            <!--Video de fondo-->
+	<body>	
+		<!--Loader-->
+			<div class="loader-wrapper">
+				<span class="loader"><span class="loader-inner"></span></span>
+			</div>
+		
+			<script>
+				$(window).on("load",function(){
+					$(".loader-wrapper").fadeOut("slow");
+				});
+			</script>
+		
+		<!--Video de fondo-->
 			<video src="img/background1.mp4" autoplay loop muted poster="img/frame.webp" alt="Background video-elBelgg">
 			</video>
 
