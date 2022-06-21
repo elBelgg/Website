@@ -1,5 +1,7 @@
 /*
-	This entire script is a bodge and i apologise profusely
+
+	Copyright 2020-2022 elBelgg
+	
 */
 
 "use strict";
